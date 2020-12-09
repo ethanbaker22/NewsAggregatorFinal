@@ -7,61 +7,75 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.newsaggregator.R
 import com.example.newsaggregator.weather.WeatherData
-//import com.example.newsaggregator.weather.response.WeatherResponse
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_weather.*
 import kotlinx.android.synthetic.main.fragment_weather.view.*
 import okhttp3.*
 import java.io.IOException
 
-
+/**
+ * @author Ethan Baker - 986237
+ * @class FragmentWeather.kt
+ * @version 1.0
+ * Fragment class for the Weather tab
+ */
 class FragmentWeather : Fragment(R.layout.fragment_weather) {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    /**
+     * Defines what happens when the tab is selected
+     * @return view - basically generates the fragment
+     */
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
 
         val view: View = inflater.inflate(R.layout.fragment_weather, container, false)
-        view.searchBtn.setOnClickListener { view ->
-            fetchJSon()
-            println("buttonclick")
+        view.searchBtn.setOnClickListener {
+            fetchJson()
         }
         return view
 
     }
 
-    fun fetchJSon() {
+    /**
+     *  This is where the Json data from the api is grabbed.
+     */
+    private fun fetchJson() {
+        val country = "Swansea" // Hard coded, but user should be able to search
+        println("Attempting to fetch JSON")
 
-        val country = "London"
-        println("attempting to fetch json")
+        val urlWeather = "http://api.weatherapi.com/v1/current.json?key=284f892e5564405897e00824200912&q=$country"
+        val urlRequestWeather = Request.Builder().url(urlWeather).build()
 
-        val url = " http://api.weatherapi.com/v1/current.json?key=284f892e5564405897e00824200912&q=$country"
-        val request = Request.Builder().url(url).build()
+        // What to do with the HTTP link of Json data
         val client = OkHttpClient()
-
-        client.newCall(request).enqueue(object : Callback {
+        client.newCall(urlRequestWeather).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 println("failed to execute")
             }
 
+            /**
+            * What to actually do with the Json
+            */
             override fun onResponse(call: Call, response: Response) {
                 val gson = GsonBuilder().create()
                 val body = response.body?.string()
-
-
                 val weatherFeed = gson.fromJson(body, WeatherData::class.java)
+
+                // Sets up an adapter
                 runOnUiThread {
                     txt_weather.text = weatherFeed.current.toString()
                 }
-
                 println(body)
             }
         })
     }
 
+    /**
+     * This is needed for runUiThread to work in a fragment - activity does it automatically
+     */
     fun Fragment?.runOnUiThread(action: () -> Unit) {
         this ?: return
         if (!isAdded) return
         activity?.runOnUiThread(action)
     }
-
 }
-

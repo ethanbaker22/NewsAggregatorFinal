@@ -9,19 +9,24 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.article_row_search.view.*
 
 /**
- *
+ * @author Ethan Baker - 986237
+ * @class SearchAdapter.kt
+ * @version 1.0.1
+ * The adapter for the search FAB/activity - allows the user to search through the news
  */
 class SearchAdapter(val mainFeed: MainActivityFeed): RecyclerView.Adapter<CustomViewHolder>() {
 
     /**
-     *
+     * Gets how many articles there are in that specific array
+     * @return mainFeed article count
      */
     override fun getItemCount(): Int {
         return mainFeed.articles.count()
     }
 
     /**
-     *
+     * 'Binds' the data to the TextView's or ImageView's
+     * Essentially this method brings it all together
      */
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val article = mainFeed.articles.get(position)
@@ -36,7 +41,8 @@ class SearchAdapter(val mainFeed: MainActivityFeed): RecyclerView.Adapter<Custom
     }
 
     /**
-     *
+     * Creates the view
+     * @return CustomerViewHolder - layout inflater
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val layoutInflater = LayoutInflater.from(parent?.context)

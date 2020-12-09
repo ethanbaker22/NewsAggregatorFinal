@@ -2,6 +2,12 @@ package com.example.newsaggregator.weather
 
 import com.example.newsaggregator.weather.Condition
 
+/**
+ * @author Ethan Baker - 986237
+ * @class Article.kt
+ * @version 1.0
+ * Data class for Current (Current Weather)
+ */
 data class Current(
     val cloud: Int,
     val condition: Condition,

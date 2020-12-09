@@ -8,11 +8,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.newsaggregator.R.*
-import com.example.newsaggregator.adapters.ForYouAdapter
-import com.example.newsaggregator.adapters.MainAdapter
+import com.example.newsaggregator.adapters.HomeAdapter
 import com.example.newsaggregator.adapters.TabAdapter
 import com.example.newsaggregator.data.MainActivityFeed
 import com.example.newsaggregator.data.Users
@@ -20,10 +18,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.google.gson.GsonBuilder
-import kotlinx.android.synthetic.main.fragment_for_you.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import okhttp3.*
 import java.io.IOException
@@ -32,23 +27,28 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 /**
- *
+ * @author Ethan Baker - 986237
+ * @class MainActivity.kt
+ * @version 1.4.1
+ * Activity Class for Main Activity
  */
 class MainActivity : AppCompatActivity() {
 
+    // News depending on country
     var country = ""
+
     /**
-     *
+     * When this activity is created
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layout.activity_main)
 
-        //
+        // Adds the Top Toolbar
         val topToolbar = findViewById<Toolbar>(id.top_toolbar)
         setSupportActionBar(topToolbar)
 
-        //
+        // Adds the Tab Layout
         val tabLayout = findViewById<TabLayout>(id.tab_layout)
         val viewPager = findViewById<ViewPager2>(id.pager)
         val tabTitles = resources.getStringArray(array.tabTitles)
@@ -63,14 +63,16 @@ class MainActivity : AppCompatActivity() {
             }
 
             /**
-             *
+             * What to do when the data changes/is requested
              */
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val users = dataSnapshot.getValue(Users::class.java)
                 val firstName = users?.firstName
                 val country = users?.country
                 // Welcome Message
-                if (country == "err") {
+                // "err" is the default country (error) which means you need to go to settings
+                // to change it to your country
+                if (country == "err") { // Only pops up if you haven't set your country
                     Toast.makeText(
                         applicationContext,
                         "Welcome $firstName, please go to Settings to set your Country.",
@@ -81,12 +83,9 @@ class MainActivity : AppCompatActivity() {
         }
         ref.addListenerForSingleValueEvent(logListener)
 
-        //
+        // Sets up adapter for Tab Adapter
         viewPager.adapter = TabAdapter(this)
-        TabLayoutMediator(
-            tabLayout,
-            viewPager,
-            TabLayoutMediator.TabConfigurationStrategy { tab, position ->
+        TabLayoutMediator(tabLayout, viewPager, TabLayoutMediator.TabConfigurationStrategy { tab, position ->
                 when (position) {
                     0 -> tab.text = tabTitles[0]
                     1 -> tab.text = tabTitles[1]
@@ -94,38 +93,39 @@ class MainActivity : AppCompatActivity() {
                 }
             }).attach()
 
-        //
+        // Sets up Search Fab
         val searchFab = findViewById<View>(R.id.fab_search)
         searchFab.setOnClickListener { view ->
             Toast.makeText(this, getString(string.search), Toast.LENGTH_SHORT).show()
             val intent = Intent(this@MainActivity, Search::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION)
-            startActivity(intent)
+            startActivity(intent) // Search Activity
         }
 
         val ref2 = FirebaseDatabase.getInstance().getReference("Users")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
         val logListener2 = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
-//                Toast.makeText(applicationContext, "Error reading from database", Toast.LENGTH_LONG)
-//                    .show()
+                // For Testing purposes
+                // Toast.makeText(applicationContext, "Error reading from database", Toast.LENGTH_LONG).show()
             }
 
+            /**
+             * What to do when the data changes/is requested
+             */
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val users = dataSnapshot.getValue(Users::class.java)
                 country = users?.country.toString()
                 println(country)
-                fetchJson()
+                fetchJson() // Used here for hierarchy reasons, won't use database data else
             }
         }
         ref2.addListenerForSingleValueEvent(logListener2)
-
-//        fetchJson()
     }
 
 
     /**
-     *
+     *  This is where the Json data from the api is grabbed.
      */
     private fun fetchJson() {
         println("Attempting to fetch JSON")
@@ -137,12 +137,12 @@ class MainActivity : AppCompatActivity() {
         val daysAgo = getDaysAgo(7)
         println(formatDate)
 
-        //
-        val urlHome = "https://newsapi.org/v2/top-headlines?country=$country&from=$daysAgo&to=$formatDate&apiKey=10cef55b087947fd844eb80ef34b3158"
-//            "https://newsapi.org/v2/everything?sources=bbc-news&from=$daysAgo&to=$formatDate&sortBy=popularity&apiKey=10cef55b087947fd844eb80ef34b3158"
+        // URL builder for home page
+        val urlHome =
+            "https://newsapi.org/v2/top-headlines?country=$country&from=$daysAgo&to=$formatDate&apiKey=10cef55b087947fd844eb80ef34b3158"
         val urlRequestHome = Request.Builder().url(urlHome).build()
 
-        //
+        // What to do with the HTTP link of Json data
         val client = OkHttpClient()
         client.newCall(urlRequestHome).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -150,7 +150,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             /**
-             *
+             * What to actually do with the Json
              */
             override fun onResponse(call: Call, response: Response) {
                 val body = response?.body?.string()
@@ -159,9 +159,9 @@ class MainActivity : AppCompatActivity() {
                 val gson = GsonBuilder().create()
                 val mainActivityFeed = gson.fromJson(body, MainActivityFeed::class.java)
 
-                //
+                // Sets the adapter for the Recycler View
                 runOnUiThread {
-                    recyclerView_home.adapter = MainAdapter(mainActivityFeed)
+                    recyclerView_home.adapter = HomeAdapter(mainActivityFeed)
                 }
             }
         })
@@ -169,7 +169,7 @@ class MainActivity : AppCompatActivity() {
 
 
     /**
-     *
+     * Function to get X number of days ago
      */
     private fun getDaysAgo(daysAgo: Int): Date {
         val calender = Calendar.getInstance()
@@ -178,7 +178,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     *
+     * Creates options menu on top toolbar
      */
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.top_toolbar_layout, menu)
@@ -186,7 +186,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     *
+     * Toolbar items selected
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         //
@@ -214,7 +214,7 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this@MainActivity, WelcomeActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT)
                 startActivity(intent)
-                logOff()
+                logOff() // Secure method
                 return true
             }
         }

@@ -5,6 +5,14 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsaggregator.data.Article
 
+/**
+ * @author Ethan Baker - 986237
+ * @class CustomViewHolder.kt
+ * @version 1.0.1
+ *
+ * A class which pushes the data that is requested. Mainly used for when clicking on a article
+ * through the ArticleView.kt class
+ */
 class CustomViewHolder(val view: View, var article: Article? = null) :
     RecyclerView.ViewHolder(view) {
 
@@ -17,9 +25,11 @@ class CustomViewHolder(val view: View, var article: Article? = null) :
     }
 
     init {
-
         view.setOnClickListener {
+            // Loads the ArticleView class
             val intent = Intent(view.context, ArticleView::class.java)
+
+            // I found No Animation looked the cleanest, can easily be changed for personal preference
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION)
 
             intent.putExtra(articleHeadlineHolder, article?.title)

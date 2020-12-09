@@ -1,7 +1,10 @@
 package com.example.newsaggregator.data
 
 /**
- *
+ * @author Ethan Baker - 986237
+ * @class Article.kt
+ * @version 1.0
+ * Data class for Article
  */
 data class Article(
     val author: String,

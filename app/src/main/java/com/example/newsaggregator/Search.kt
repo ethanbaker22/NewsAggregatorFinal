@@ -2,52 +2,49 @@ package com.example.newsaggregator
 
 import android.os.Bundle
 import android.view.Menu
-import android.view.View
-import android.widget.Button
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.newsaggregator.adapters.MainAdapter
 import com.example.newsaggregator.adapters.SearchAdapter
 import com.example.newsaggregator.data.MainActivityFeed
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_search.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import okhttp3.*
 import java.io.IOException
 
 /**
- *
+ * @author Ethan Baker - 986237
+ * @class Search.kt
+ * @version 1.1
+ * Activity Class for Searching
  */
 class Search : AppCompatActivity() {
 
     /**
-     *
+     * When this activity is created
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        //
+        // Setting top toolbar to the specific version
         val topToolbar = findViewById<Toolbar>(R.id.top_toolbar_search)
 
         setSupportActionBar(topToolbar)
         supportActionBar?.title = getString(R.string.search)
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        // If wanting a back arrow top left...
+        // supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         recyclerView_search.layoutManager = LinearLayoutManager(this)
-
-
         searchBtn.setOnClickListener {
-            fetchJson()
+            fetchJson() // Allows communication with the database
         }
 
     }
 
-
     /**
-     *
+     *  This is where the Json data from the api is grabbed.
      */
     private fun fetchJson() {
         val userSearch = txt_search.text
@@ -64,7 +61,7 @@ class Search : AppCompatActivity() {
             }
 
             /**
-             *
+             * What to actually do with the Json
              */
             override fun onResponse(call: Call, response: Response) {
                 val body = response?.body?.string()
@@ -73,7 +70,7 @@ class Search : AppCompatActivity() {
                 val gson = GsonBuilder().create()
                 val searchFeed = gson.fromJson(body, MainActivityFeed::class.java)
 
-                //
+                // Sets the adapter for the Recycler View
                 runOnUiThread {
                     recyclerView_search.adapter = SearchAdapter(searchFeed)
                 }
@@ -82,7 +79,7 @@ class Search : AppCompatActivity() {
     }
 
     /**
-     *
+     * Sets the options mean for the toolbar
      */
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.top_toolbar_search, menu)

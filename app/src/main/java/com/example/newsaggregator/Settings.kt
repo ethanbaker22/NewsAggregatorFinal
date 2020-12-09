@@ -17,10 +17,14 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_settings.*
 
 /**
- *
+ * @author Ethan Baker - 986237
+ * @class Settings.kt
+ * @version 1.1
+ * Activity Class for Settings
  */
 class Settings : AppCompatActivity() {
 
+    // Firebase Auth used in Setting and Getting Preferences
     private var users = Users()
     private lateinit var mAuth: FirebaseAuth
     private lateinit var refUsers: DatabaseReference
@@ -29,19 +33,19 @@ class Settings : AppCompatActivity() {
     var databaseSpinTextPref = ""
 
     /**
-     *
+     * When this activity is created
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         mAuth = FirebaseAuth.getInstance()
 
-        //
+        // Sets the specific toolbar
         val topToolbar = findViewById<Toolbar>(R.id.top_toolbar_search)
         setSupportActionBar(topToolbar)
         supportActionBar?.title = getString(R.string.settings)
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        // Country Spinner
         val spinnerCountry: Spinner = findViewById(R.id.spnCountry)
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
@@ -58,7 +62,8 @@ class Settings : AppCompatActivity() {
             prompt = getString(R.string.select_country)
         }
 
-        val spinnerPref: Spinner = findViewById(R.id.spnIntrests)
+        // Preferences Spinner
+        val spinnerPref: Spinner = findViewById(R.id.spnPreferences)
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
             this,
@@ -74,9 +79,10 @@ class Settings : AppCompatActivity() {
             prompt = getString(R.string.preferences)
         }
 
+        // Country Spinner item Selected
         spnCountry.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
+                // Not implemented
             }
 
             override fun onItemSelected(
@@ -85,13 +91,13 @@ class Settings : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-//                users = parent?.getItemAtPosition(position) as Users
                 val spinText = spinnerCountry.selectedItem.toString()
                 println(spinText)
                 firebaseUserId = mAuth.currentUser!!.uid
                 refUsers =
                     FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserId)
 
+                // Options for Countries
                 if (spinText == "Australia") {
                     databaseSpinTextCountry = "au"
                 } else if (spinText == "United Kingdom") {
@@ -101,9 +107,11 @@ class Settings : AppCompatActivity() {
                 }
             }
         }
-        spnIntrests.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+        // Preferences Spinner item Selected
+        spnPreferences.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
+                // Not implemented
             }
 
             override fun onItemSelected(
@@ -112,13 +120,13 @@ class Settings : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-//                users = parent?.getItemAtPosition(position) as Users
                 val spinText = spinnerPref.selectedItem.toString()
                 println(spinText)
                 firebaseUserId = mAuth.currentUser!!.uid
                 refUsers =
                     FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserId)
 
+                // Options for Preferences
                 if (spinText == "Business") {
                     databaseSpinTextPref = "business"
                 } else if (spinText == "Entertainment") {
@@ -135,6 +143,8 @@ class Settings : AppCompatActivity() {
             }
 
         }
+
+        // Update Database on Click
         settingsUpdateBtn.setOnClickListener {
             val userHashMap = HashMap<String, Any>()
 
@@ -146,12 +156,12 @@ class Settings : AppCompatActivity() {
             val intent = Intent(this@Settings, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
-            finish()
+            finish() // Doesn't allow user to go back
         }
     }
 
     /**
-     *
+     * Sets the options mean for the toolbar
      */
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.top_toolbar_search, menu)

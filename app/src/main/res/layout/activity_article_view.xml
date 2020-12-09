@@ -15,44 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.091">
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/txt_article_headline_clicked"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:paddingHorizontal="6dp"-->
-        <!--            android:text="@string/headlineName"-->
-        <!--            android:textSize="20sp"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintHorizontal_bias="0.0"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/txt_article_source_for_you" />-->
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/txt_article_source_clicked"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="12dp"-->
-        <!--            android:paddingHorizontal="6dp"-->
-        <!--            android:paddingVertical="6dp"-->
-        <!--            android:paddingBottom="100dp"-->
-        <!--            android:text="@string/source"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintHorizontal_bias="0.0"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/img_article_for_you" />-->
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/top_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="@color/colorAccent"
-            app:titleTextColor="@color/colorPrimaryDark"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="2dp" />
-
+        app:layout_constraintTop_toBottomOf="@+id/top_toolbar"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/txt_article_headline_view"
@@ -61,7 +25,8 @@
             android:layout_marginTop="16dp"
             android:text="@string/headlineName"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="24dp"
+            android:textSize="24sp"
+            android:paddingBottom="10dp"
             app:layout_constraintBottom_toTopOf="@+id/txt_article_published_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -91,7 +56,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_article_published_view"
-            app:srcCompat="@drawable/ic_breaking_news" />
+            app:srcCompat="@drawable/ic_breaking_news"
+            android:contentDescription="@string/newStories" />
 
         <TextView
             android:id="@+id/txt_article_source_view"
@@ -120,6 +86,15 @@
 
 
     </LinearLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/top_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/colorAccent"
+        app:titleTextColor="@color/colorPrimaryDark"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="1dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
