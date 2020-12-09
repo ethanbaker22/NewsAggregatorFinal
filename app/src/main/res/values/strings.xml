@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">News Aggregator</string>
+    <string name="headlineName">This is a Headline!</string>
+    <string name="headlineDescription">Description of Headline.</string>
+    <string name="source">Source</string>
+    <string name="newStories">The Newest Stories</string>
+    <string name="weather">Weather</string>
+    <string name="settings">Settings</string>
+    <string name="refresh">Refresh</string>
+    <string name="refresh_xml">Refresh</string>
+    <string name="profile">Your Profile</string>
+    <string name="linked">Linked Accounts</string>
+    <string name="logoff">Log Off</string>
+    <string name="back">Back</string>
+    <string name="body">Body</string>
+    <string name="published_at">Published At</string>
+
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="username">Username</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="log_in">Log In</string>
+    <string name="create_account">Create Account</string>
+    <string name="or">Or</string>
+    <string name="welcome">Welcome</string>
+    <string name="country">Country</string>
+    <string name="select_country">Please Select Your Country</string>
+
+    <string name="home">Home</string>
+    <string name="forYou">For you</string>
+    <string name="topStories">Top Stories</string>
+    <string name="search">Search</string>
+    <string name="search_txt">Enter Search Request</string>
+    <string name="save_btn">Save Preferences</string>
+    <string name="preferences">Your Preferences</string>
+    <string name="error_message">Error Message: </string>
+    <string name="empty_field">field is empty</string>
+
+    <string-array name="tabTitles">
+        <item>Top Stories</item>
+        <item>For You</item>
+        <item>Weather</item>
+    </string-array>
+
+    <string-array name="countries">
+        <item>Select Your Country</item>
+        <item>Australia</item>
+        <item>United Kingdom</item>
+        <item>United States of America</item>
+    </string-array>
+
+    <string-array name="preferences">
+        <item>Select Your Preferences</item>
+        <item>Business</item>
+        <item>Entertainment</item>
+        <item>General</item>
+        <item>Science</item>
+        <item>Sports</item>
+    </string-array>
+</resources>

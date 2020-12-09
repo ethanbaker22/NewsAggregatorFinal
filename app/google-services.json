@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "230182315003",
+    "firebase_url": "https://news-app-dce33.firebaseio.com",
+    "project_id": "news-app-dce33",
+    "storage_bucket": "news-app-dce33.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:230182315003:android:7165f9b3df1ad5e5cfa15e",
+        "android_client_info": {
+          "package_name": "com.example.newsaggregator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "230182315003-jk919lhchlk1g1f8oan2smoqkref54kk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7t30WC9zfEwpuffmXyvEpCUNbNYdgfes"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "230182315003-jk919lhchlk1g1f8oan2smoqkref54kk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:230182315003:android:05272b188cd1cfc3cfa15e",
+        "android_client_info": {
+          "package_name": "com.example.newsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "230182315003-h3c32pjp94pvvrn377qs3hoeq10la4v4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.newsapp",
+            "certificate_hash": "b9a775f3b1462029f7c8cc76f88a9178df1abacf"
+          }
+        },
+        {
+          "client_id": "230182315003-jk919lhchlk1g1f8oan2smoqkref54kk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7t30WC9zfEwpuffmXyvEpCUNbNYdgfes"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "230182315003-jk919lhchlk1g1f8oan2smoqkref54kk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

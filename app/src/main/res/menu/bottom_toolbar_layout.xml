@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home"
+        app:showAsAction="ifRoom"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/for_you"
+        android:icon="@drawable/ic_for_you"
+        app:showAsAction="ifRoom"
+        android:title="@string/forYou" />
+    <item
+        android:id="@+id/top_stories"
+        android:icon="@drawable/ic_top_stories"
+        app:showAsAction="ifRoom"
+        android:title="@string/topStories" />
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="ifRoom"
+        android:title="@string/search" />
+</menu>

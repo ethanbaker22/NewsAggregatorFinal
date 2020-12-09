@@ -1,0 +1,8 @@
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#CF0303</color>
+    <color name="greyBtn">#BCBCBC</color>
+    <color name="redBtnsBackground">#FF7575</color>
+    <color name="greyBtnsBackground">#8E8E8E</color>
+</resources>
