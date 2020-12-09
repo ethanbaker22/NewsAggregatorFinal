@@ -167,7 +167,6 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-
     /**
      * Function to get X number of days ago
      */
