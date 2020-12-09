@@ -139,7 +139,7 @@ class MainActivity : AppCompatActivity() {
 
         // URL builder for home page
         val urlHome =
-            "https://newsapi.org/v2/top-headlines?country=$country&from=$daysAgo&to=$formatDate&apiKey=10cef55b087947fd844eb80ef34b3158"
+            "https://newsapi.org/v2/top-headlines?country=$country&from=$daysAgo&to=$formatDate&apiKey=0f018cfe6cec48c8b84ce968752b9140"
         val urlRequestHome = Request.Builder().url(urlHome).build()
 
         // What to do with the HTTP link of Json data

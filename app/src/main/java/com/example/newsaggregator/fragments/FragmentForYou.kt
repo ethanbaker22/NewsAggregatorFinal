@@ -67,7 +67,7 @@ class FragmentForYou : Fragment() {
 
         // $country & $preferences from database
         val urlForYou =
-            "https://newsapi.org/v2/top-headlines?country=$country&category=$preferences&apiKey=10cef55b087947fd844eb80ef34b3158"
+            "https://newsapi.org/v2/top-headlines?country=$country&category=$preferences&apiKey=0f018cfe6cec48c8b84ce968752b9140"
         val urlRequestForYou = Request.Builder().url(urlForYou).build() //URL builder
 
         // What to do with the HTTP link of Json data

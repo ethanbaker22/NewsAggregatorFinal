@@ -46,7 +46,7 @@ class RegisterActivity : AppCompatActivity() {
         val password: String = passwordRegister.text.toString()
         val firstName: String = firstNameRegister.text.toString()
         val lastName: String = lastNameRegister.text.toString()
-        val country: String = "gb" // set default country to the UK (gb) in the database
+        val country: String = "err" // set default country to the err in the database - makes user change it
 
         // Check that there is actually data
         if (emailAddress.equals("")){
@@ -77,7 +77,7 @@ class RegisterActivity : AppCompatActivity() {
                             val intent = Intent(this@RegisterActivity, MainActivity::class.java)
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION)
                             startActivity(intent)
-                            finish() // Doesn't allow user to mess with the program using back arrow
+//                            finish() // Doesn't allow user to mess with the program using back arrow
                         }
                     }
                 } else {

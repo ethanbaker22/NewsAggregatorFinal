@@ -37,6 +37,8 @@
     <string name="preferences">Your Preferences</string>
     <string name="error_message">Error Message: </string>
     <string name="empty_field">field is empty</string>
+    <string name="test_output">Test: Output</string>
+    <string name="test_weather_forecast">Test: Weather Forecast</string>
 
     <string-array name="tabTitles">
         <item>Top Stories</item>

@@ -9,11 +9,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="11sp"
-        android:text="Test: Weather Forecast"/>
+        android:text="@string/test_weather_forecast"/>
 
     <TextView
         android:id="@+id/weatheroutput"
-        android:text="TEST WEATHER TEXT GOES HERE"
+        android:text="@string/test_output"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -21,6 +21,6 @@
         android:id="@+id/searchBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="refresh"/>
+        android:text="@string/refresh"/>
 
 </LinearLayout>
